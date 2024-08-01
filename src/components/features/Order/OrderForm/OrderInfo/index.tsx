@@ -1,6 +1,7 @@
 import { Divider } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
+import { useGetPoints } from '@/api/hooks/useGetPoints';
 import { useGetProductDetail } from '@/api/hooks/useGetProductDetail';
 import { Button } from '@/components/common/Button';
 import { Spacing } from '@/components/common/layouts/Spacing';
@@ -17,6 +18,7 @@ export const OrderFormOrderInfo = ({ orderHistory }: Props) => {
   const { id, count } = orderHistory;
 
   const { data: detail } = useGetProductDetail({ productId: id.toString() });
+  const { data: points } = useGetPoints();
 
   const totalPrice = detail.price * count;
 
@@ -28,6 +30,11 @@ export const OrderFormOrderInfo = ({ orderHistory }: Props) => {
       <Divider color="#ededed" />
       <CashReceiptFields />
       <Divider color="#ededed" />
+
+      <div>
+        <p>보유 포인트 : {points?.points}</p>
+      </div>
+
       <ItemWrapper>
         <LabelText>최종 결제금액</LabelText>
         <HeadingText>{totalPrice}원</HeadingText>
