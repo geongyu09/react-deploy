@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { usePostUserJoin } from '@/api/hooks/usePostUserJoin';
+import type { PostUserLoginResponse } from '@/api/hooks/userPostUserLogin';
 import KAKAO_LOGO from '@/assets/kakao_logo.svg';
 import { Button } from '@/components/common/Button';
 import { UnderlineTextField } from '@/components/common/Form/Input/UnderlineTextField';
@@ -16,10 +17,10 @@ export const JoinPage = () => {
   const [password, setPassword] = useState('');
   const [passwordConfirm, setPasswordConfirm] = useState('');
 
-  const onSuccess = () => {
+  const onSuccess = ({ token }: PostUserLoginResponse) => {
     alert('회원가입이 완료되었습니다.');
-    authSessionStorage.set(email);
-    navigate('/login');
+    authSessionStorage.set(token);
+    navigate('/');
   };
   const onError = () => {
     alert('회원가입에 실패했습니다.');
