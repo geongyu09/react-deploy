@@ -31,6 +31,7 @@ describe('initStorage', () => {
     it('OrderHistory 타입의 데이터를 저장하고 검색할 수 있다', () => {
       const testOrderHistory: OrderHistory = {
         id: 1,
+        optionId: 1,
         count: 5,
       };
       orderHistorySessionStorage.set(testOrderHistory);
@@ -38,7 +39,7 @@ describe('initStorage', () => {
     });
 
     it('OrderHistory의 count를 업데이트할 수 있다', () => {
-      const initialOrderHistory: OrderHistory = { id: 1, count: 5 };
+      const initialOrderHistory: OrderHistory = { id: 1, optionId: 1, count: 5 };
       orderHistorySessionStorage.set(initialOrderHistory);
 
       const updatedOrderHistory: OrderHistory = { ...initialOrderHistory, count: 7 };

@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 import { FormProvider, useForm } from 'react-hook-form';
 
+import { usePostOrderProduct } from '@/api/hooks/usePostOrderProduct';
 import { Spacing } from '@/components/common/layouts/Spacing';
 import { SplitLayout } from '@/components/common/layouts/SplitLayout';
 import type { OrderFormData, OrderHistory } from '@/types';
@@ -16,6 +17,7 @@ type Props = {
 
 export const OrderForm = ({ orderHistory }: Props) => {
   const { id, count } = orderHistory;
+  const { mutate: orderProduct } = usePostOrderProduct();
 
   const methods = useForm<OrderFormData>({
     defaultValues: {
@@ -40,14 +42,15 @@ export const OrderForm = ({ orderHistory }: Props) => {
       return;
     }
 
-    // orderProduct(
-    //   {
-    //     optionId: values.productId, //TODO: optionId로 변경하기
-    //     quantity: values.productQuantity,
-    //     message: values.messageCardTextMessage,
-    //   },
-    //   { onSuccess: onSuccessfulOrder },
-    // );
+    orderProduct(
+      {
+        optionId: orderHistory.optionId,
+        quantity: values.productQuantity,
+        points: 100,
+        message: values.messageCardTextMessage,
+      },
+      { onSuccess: onSuccessfulOrder },
+    );
 
     onSuccessfulOrder();
   };

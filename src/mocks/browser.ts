@@ -1,6 +1,7 @@
 import { setupWorker } from 'msw';
 
 import { categoriesMockHandler } from '@/api/mock/categories.mock';
+import { orderMockHandler } from '@/api/mock/order.mock';
 import { productsMockHandler } from '@/api/mock/products.mock';
 import { userMockhandler } from '@/api/mock/user.mock';
 import { wishlistMockHandler } from '@/api/mock/wishlist.mock';
@@ -10,4 +11,5 @@ export const worker = setupWorker(
   ...productsMockHandler,
   ...userMockhandler,
   ...wishlistMockHandler,
+  ...orderMockHandler,
 );

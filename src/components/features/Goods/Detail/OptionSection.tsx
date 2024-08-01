@@ -39,6 +39,7 @@ export const OptionSection = ({ productId }: Props) => {
 
     orderHistorySessionStorage.set({
       id: parseInt(productId),
+      optionId: options[0].id,
       count: parseInt(countAsString),
     });
 

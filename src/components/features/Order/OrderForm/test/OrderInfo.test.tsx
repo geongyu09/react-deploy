@@ -26,6 +26,7 @@ jest.mock('../GoodsInfo', () => ({
 
 const mockOrderHistory: OrderHistory = {
   id: 1,
+  optionId: 1,
   count: 1,
 };
 
