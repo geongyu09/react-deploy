@@ -5,6 +5,7 @@ import { useGetPoints } from '@/api/hooks/useGetPoints';
 import { useGetProductDetail } from '@/api/hooks/useGetProductDetail';
 import { Button } from '@/components/common/Button';
 import { Spacing } from '@/components/common/layouts/Spacing';
+import { useOrderFormContext } from '@/hooks/useOrderFormContext';
 import type { OrderHistory } from '@/types';
 
 import { HeadingText } from '../Common/HeadingText';
@@ -16,6 +17,7 @@ type Props = {
 };
 export const OrderFormOrderInfo = ({ orderHistory }: Props) => {
   const { id, count } = orderHistory;
+  const { register } = useOrderFormContext();
 
   const { data: detail } = useGetProductDetail({ productId: id.toString() });
   const { data: points } = useGetPoints();
@@ -33,6 +35,7 @@ export const OrderFormOrderInfo = ({ orderHistory }: Props) => {
 
       <div>
         <p>보유 포인트 : {points?.points}</p>
+        <input type="nubmer" placeholder="포인트 사용" {...register('points')} />
       </div>
 
       <ItemWrapper>

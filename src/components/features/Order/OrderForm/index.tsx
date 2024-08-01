@@ -26,6 +26,7 @@ export const OrderForm = ({ orderHistory }: Props) => {
       senderId: 0,
       receiverId: 0,
       hasCashReceipt: false,
+      points: 0,
     },
   });
   const { handleSubmit } = methods;
@@ -46,7 +47,7 @@ export const OrderForm = ({ orderHistory }: Props) => {
       {
         optionId: orderHistory.optionId,
         quantity: values.productQuantity,
-        points: 100,
+        points: values.points,
         message: values.messageCardTextMessage,
       },
       { onSuccess: onSuccessfulOrder },
@@ -105,6 +106,13 @@ const validateOrderForm = (values: OrderFormData): { errorMessage?: string; isVa
   if (values.messageCardTextMessage.length > 100) {
     return {
       errorMessage: '메시지는 100자 이내로 입력해주세요.',
+      isValid: false,
+    };
+  }
+
+  if (!/^\d+$/.test(values.points.toString())) {
+    return {
+      errorMessage: '현금영수증 번호는 숫자로만 입력해주세요.',
       isValid: false,
     };
   }
