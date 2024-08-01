@@ -25,9 +25,11 @@ const initStorage = <T extends keyof StorageKey>(key: T, storage: Storage) => {
 export const authSessionStorage = initStorage('authToken', sessionStorage);
 export const orderHistorySessionStorage = initStorage('orderHistory', sessionStorage);
 export const serverTypeSessionStorage = initStorage('serverType', sessionStorage);
+export const emailSessionStorage = initStorage('email', sessionStorage);
 
 interface StorageKey {
   authToken?: string;
   orderHistory?: OrderHistory;
   serverType?: keyof typeof BASE_URL_LIST;
+  email?: string;
 }

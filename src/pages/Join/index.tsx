@@ -9,7 +9,7 @@ import { Button } from '@/components/common/Button';
 import { UnderlineTextField } from '@/components/common/Form/Input/UnderlineTextField';
 import { Spacing } from '@/components/common/layouts/Spacing';
 import { breakpoints } from '@/styles/variants';
-import { authSessionStorage } from '@/utils/storage';
+import { authSessionStorage, emailSessionStorage } from '@/utils/storage';
 
 export const JoinPage = () => {
   const navigate = useNavigate();
@@ -20,6 +20,7 @@ export const JoinPage = () => {
   const onSuccess = ({ token }: PostUserLoginResponse) => {
     alert('회원가입이 완료되었습니다.');
     authSessionStorage.set(token);
+    emailSessionStorage.set(email);
     navigate('/');
   };
   const onError = () => {

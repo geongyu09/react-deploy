@@ -9,7 +9,7 @@ import { Button } from '@/components/common/Button';
 import { UnderlineTextField } from '@/components/common/Form/Input/UnderlineTextField';
 import { Spacing } from '@/components/common/layouts/Spacing';
 import { breakpoints } from '@/styles/variants';
-import { authSessionStorage } from '@/utils/storage';
+import { authSessionStorage, emailSessionStorage } from '@/utils/storage';
 
 export const LoginPage = () => {
   const navigate = useNavigate();
@@ -19,6 +19,7 @@ export const LoginPage = () => {
   const onSuccess = ({ token }: PostUserLoginResponse) => {
     alert('로그인이 완료되었습니다.');
     authSessionStorage.set(token);
+    emailSessionStorage.set(email);
     navigate('/');
   };
 
